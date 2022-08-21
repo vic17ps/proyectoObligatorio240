@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    let user = localStorage.getItem("correo");
+document.addEventListener("DOMContentLoaded", () => { //listener que checkea al cargar la pagina si el usuario esta loggeado
+    let user = localStorage.getItem("correo");   
 
-    if (user == null) {
+    if (user == null) {  //si no lo esta, sale alerta y redirige a la pagina del login
         alert("Debe ingresar");
         location.href = "login.html"
     } else {
