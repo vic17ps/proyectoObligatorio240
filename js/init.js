@@ -2,10 +2,10 @@ const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
 const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
 const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const CARS_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
+const EXT_TYPE = ".json";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -40,4 +40,19 @@ let getJSONData = function(url){
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => { //listener que checkea al cargar la pagina si el usuario esta loggeado
+  let user = localStorage.getItem("correo");   
+
+  if (user == null) {  //si no lo esta, sale alerta y redirige a la pagina del login
+      alert("Debe ingresar");
+      location.href = "login.html"
+  } else {
+      document.getElementById("user").innerHTML = user
+  }
+document.getElementById("cerrar").addEventListener("click", ()=> { //listener para cerrar sesion
+  alert("Se cerrará la sesión");
+  localStorage.clear(); //borra localStorage
+  location.href="login.html" //redirige a pagina de login
+});
+});
 // 

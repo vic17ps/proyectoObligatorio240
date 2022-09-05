@@ -12,15 +12,3 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
-
-document.addEventListener("DOMContentLoaded", () => { //listener que checkea al cargar la pagina si el usuario esta loggeado
-    let user = localStorage.getItem("correo");   
-
-    if (user == null) {  //si no lo esta, sale alerta y redirige a la pagina del login
-        alert("Debe ingresar");
-        location.href = "login.html"
-    } else {
-        document.getElementById("user").innerHTML = user
-    }
-
-});
