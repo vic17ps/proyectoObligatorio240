@@ -37,72 +37,38 @@ function filtrar(array) {
     showProductsList(prodFiltro);
 }
 
-const ORDER_ASC_BY_COST = "$$";
-const ORDER_DESC_BY_COST = "$";
-const ORDER_BY_SOLD_COUNT = "Rel";
-//let currentProductsArray = [];
-let currentSortCriteria = undefined;
-
-function ordenar(criteria, array) {
-    let result = [];
-    if (criteria === ORDER_ASC_BY_COST) {
-        result = array.products.sort(function (a, b) {
-            let aCost = parseInt(a.cost);
-            let bCost = parseInt(b.cost);
-            if (aCost < bCost) { return -1; }
-            if (aCost > bCost) { return 1; }
-            return 0;
-        });
-    } else if (criteria === ORDER_DESC_BY_COST) {
-        result = array.products.sort(function (a, b) {
-            let aCost = parseInt(a.cost);
-            let bCost = parseInt(b.cost);
-            if (aCost > bCost) { return -1; }
-            if (aCost < bCost) { return 1; }
-            return 0;
-        });
-    } else if (criteria === ORDER_BY_SOLD_COUNT) {
-        result = array.products.sort(function (a, b) {
-            let aCount = parseInt(a.soldCount);
-            let bCount = parseInt(b.soldCount);
-            if (aCount > bCount) { return -1; }
-            if (aCount < bCount) { return 1; }
-            return 0;
-        });
-    }
-    return result;
+function ordenoAsc(array) {
+    array.sort((a, b) => {
+        let aCost = parseInt(a.cost);
+        let bCost = parseInt(b.cost);
+        if (aCost < bCost) { return -1; }
+        if (aCost > bCost) { return 1; }
+        return 0;
+    });
+    showProductsList(array);
 }
 
-function sortProducts(sortCriteria, productsArray1) {
-    currentSortCriteria = sortCriteria;
-    if (productsArray1 != undefined) {
-        productsArray = productsArray1;
-    }
-    productsArray = ordenar(currentSortCriteria, productsArray);
-
-    showProductsList();
+function ordenoDesc(array) {
+    array.sort((a, b) => {
+        let aCost = parseInt(a.cost);
+        let bCost = parseInt(b.cost);
+        if (aCost > bCost) { return -1; }
+        if (aCost < bCost) { return 1; }
+        return 0;
+    });
+    showProductsList(array);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('filtro').addEventListener('click', () => {
-        filtrar(productsArray);
+function ordenoRel(array) {
+    array.sort((a, b) => {
+        let aCount = parseInt(a.soldCount);
+        let bCount = parseInt(b.soldCount);
+        if (aCount > bCount) { return -1; }
+        if (aCount < bCount) { return 1; }
+        return 0;
     });
-    document.getElementById('limpio').addEventListener('click', () => {
-        document.getElementById('minimo').value = "";
-        document.getElementById('maximo').value = "";
-        showProductsList(productsArray);
-    });
-    document.getElementById('sortPrecioAsc').addEventListener('click', function () {
-        sortProducts(ORDER_ASC_BY_COST);
-    });
-    document.getElementById('sortPrecioDesc').addEventListener('click', function () {
-        sortProducts(ORDER_DESC_BY_COST);
-    });
-    document.getElementById('sortRel').addEventListener('click', function () {
-        sortProducts(ORDER_BY_SOLD_COUNT);
-    });
-});
-
+    showProductsList(array);
+}
 
 let catID = localStorage.getItem("catID")
 
@@ -114,5 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
             showProductsList(productsArray);
         }
     });
-
+    document.getElementById('filtro').addEventListener('click', () => {
+        filtrar(productsArray);
+    });
+    document.getElementById('limpio').addEventListener('click', () => {
+        document.getElementById('minimo').value = "";
+        document.getElementById('maximo').value = "";
+        showProductsList(productsArray);
+    });
+    document.getElementById('sortPrecioAsc').addEventListener('click', () => {
+        ordenoAsc(productsArray);
+    });
+    document.getElementById('sortPrecioDesc').addEventListener('click', () => {
+        ordenoDesc(productsArray);
+    });
+    document.getElementById('sortRel').addEventListener('click', () => {
+        ordenoRel(productsArray);
+    });
 });
