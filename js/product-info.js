@@ -65,24 +65,48 @@ function showScore(points) {
 
 //let newComments = []
 
-function showNewComments(prodComments) {
-  let commentList = "";
-  for (let comment of prodComments){
-    commentList += `<ul class="list-group mb-3">
-    <li class="list-group-item list-group-item-action">` +
-      `<b> ${comment.user} </b>` + " " + `<span> ${showScore(comment.stars)} </span>` + " " +
-      `</li>
-    <small class="list-group-item d-flex justify-content-between lh-condensed"> ${comment.description} </small>`;
+//function showNewComments(prodComments) {
+ // let commentList = "";
+ // for (let comment of prodComments){
+ //   commentList += `<ul class="list-group mb-3">
+  //  <li class="list-group-item list-group-item-action">` +
+  //    `<b> ${comment.user} </b>` + " " + `<span> ${showScore(comment.score)} </span>` + " " +
+  //    `</li>
+ //   <small class="list-group-item d-flex justify-content-between lh-condensed"> ${comment.description} </small>`;
+//  }
+ // document.getElementById('comments-container').innerHTML = commentList;
+//};
+
+function currentDate() {
+  let today = new Date();
+  let day = today.getDate();
+  let month = today.getMonth();
+  let year = today.getFullYear();
+  let hour = today.getHours();
+  if (hour<10) {
+    hour = "0" + hour;
   }
-  document.getElementById('comments-container').innerHTML = commentList;
-};
+  let minutes = today.getMinutes();
+  if (minutes<10) {
+    minutes = "0" + minutes;
+  }
+  let seconds = today.getSeconds();
+  if (seconds<10) {
+    seconds = "0" + seconds;
+  }
+  let cDate = (`${year}-${month}-${day} ${hour}:${minutes}:${seconds}`)
+  return cDate;
+
+}
 
 function writeComment() {
   let users={}
   users.user = localStorage.getItem("correo");
   users.description = document.getElementById("prodUserComment").value;
+  users.score = document.getElementById("userProdScore").value;
+  users.dateTime = currentDate();
   prodComments.push(users);
-  showNewComments(prodComments);
+  showComments(prodComments);
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -104,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.getElementById("sendCom").addEventListener('click',()=>{
     writeComment();
-    showNewComments(prodComments);
+    showComments(prodComments);
   });
   document.getElementById('userProdScore').addEventListener('change',function(){
   showScore(document.getElementById('userProdScore').value);
