@@ -7,7 +7,7 @@ function showProductsList(array) { //funcion que recibe productsArray con sus da
     for (let i = 0; i < array.length; i++) { //for que recorre el array con los datos json, voy llamando elementos que necesite 
         let products = array[i];
         htmlContentToAppend +=
-            `<div class="list-group-item list-group-item-action">
+            `<div onclick="setProdID(${products.id})" class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="` + products.image + `" alt="product image" class="img-thumbnail"></img>
@@ -71,6 +71,12 @@ function ordenoRel(array) {
 }
 
 let catID = localStorage.getItem("catID")
+
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
+
 
 //cuando carga la pagina, se llama a getJSONData para obtener el json que tengo linkeado
 document.addEventListener("DOMContentLoaded", function () {
