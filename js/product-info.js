@@ -59,24 +59,6 @@ function showScore(points) {
     return stars;
 };
 
-//var newComments = JSON.parse(prodComments);
-//newComments['prodComments'].push({"teamId":"4","status":"pending"});
-//Str_txt = JSON.stringify(parse_obj);
-
-//let newComments = []
-
-//function showNewComments(prodComments) {
- // let commentList = "";
- // for (let comment of prodComments){
- //   commentList += `<ul class="list-group mb-3">
-  //  <li class="list-group-item list-group-item-action">` +
-  //    `<b> ${comment.user} </b>` + " " + `<span> ${showScore(comment.score)} </span>` + " " +
-  //    `</li>
- //   <small class="list-group-item d-flex justify-content-between lh-condensed"> ${comment.description} </small>`;
-//  }
- // document.getElementById('comments-container').innerHTML = commentList;
-//};
-
 function currentDate() {
   let today = new Date();
   let day = today.getDate();
