@@ -45,11 +45,50 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="text-center p-4">
+    <h2>Carrito de compras</h2>
+    <p class="lead">Artículos a comprar</p>
+  </div>
+    <div class="container" id="cartCont">
+    </div>
+    <hr>
+    <div id="sType" class="col-md-8 order-md-1">
+      <h5 class="mb-3">Tipo de envio</h5>
+      <div  class="d-block my-3">
+        <div class="custom-control custom-radio">
+          <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked=""
+            required="">
+          <label class="custom-control-label" for="goldradio">Premium 2 a 5 días (15%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="premiumradio">Express 5 a 8 días (7%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="standardradio">Standard 12 a 15 días (5%)</label>
+        </div>
       </div>
     </div>
+    <div id="sDir" class="col-md-8 order-md-1">
+    <h5 class="mb-3" id="sss">Dirección de envío</h5>
+    <div id="dirCenter" class="row">
+    <div class="col-md-3 mb-3">
+    <label for="street">Calle</label>
+    <input type="text" class="form-control" id="streetName" value="">
+  </div>
+    <div class="col-md-3 mb-3">
+    <label for="streetNum">Numero</label>
+    <input type="number" class="form-control" id="streetNum" value="">
+  </div> 
+  <div class="row">
+  <div class="col-md-3 mb-3">
+    <label for="streetCor">Esquina</label>
+    <input type="text" class="form-control" id="streetCor" value="">
+  </div>
+  </div>
+</div>
+</div>
   </main>
   <footer class="text-muted">
     <div class="container">

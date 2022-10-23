@@ -256,3 +256,21 @@ h3 {
 .dropdown:hover .dropbtn {
   background-color: #363836;
 }
+
+#resTotal {
+  font-weight: bold;
+}
+
+#streetName, #streetNum, #streetCor {
+  width: auto;
+}
+
+#sDir, #sType {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+#dirCenter {
+  display: inline-block;
+}
