@@ -51,43 +51,155 @@
   </div>
     <div class="container" id="cartCont">
     </div>
-    <hr>
+    <hr class="mb-4">
     <div id="sType" class="col-md-8 order-md-1">
       <h5 class="mb-3">Tipo de envio</h5>
       <div  class="d-block my-3">
         <div class="custom-control custom-radio">
-          <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked=""
-            required="">
-          <label class="custom-control-label" for="goldradio">Premium 2 a 5 días (15%)</label>
+          <input name="publicationType" type="radio" class="delivery" value=0.15 required> Premium 2 a 5 días (15%) <br>
         </div>
         <div class="custom-control custom-radio">
-          <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
-          <label class="custom-control-label" for="premiumradio">Express 5 a 8 días (7%)</label>
+          <input name="publicationType" type="radio" class="delivery" value=0.07 required> Express 5 a 8 días (7%) <br>
         </div>
         <div class="custom-control custom-radio">
-          <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
-          <label class="custom-control-label" for="standardradio">Standard 12 a 15 días (5%)</label>
+          <input name="publicationType" type="radio" class="delivery" value=0.05 required> Standard 12 a 15 días (5%) <br>
+        </div>
+        <div class="invalid-feedback">
+          Seleccione un tipo de envio
         </div>
       </div>
     </div>
     <div id="sDir" class="col-md-8 order-md-1">
-    <h5 class="mb-3" id="sss">Dirección de envío</h5>
+    <form class="row g-3 needs-validation" id="address" novalidate>
+    <h5 class="mb-3">Dirección de envío</h5>
     <div id="dirCenter" class="row">
     <div class="col-md-3 mb-3">
     <label for="street">Calle</label>
-    <input type="text" class="form-control" id="streetName" value="">
+    <input type="text" class="form-control is-invalid" id="streetName" onchange="validateAddInfo()" value="" required>
+    <div class="invalid-feedback">
+      Ingresa una calle
+    </div>
   </div>
     <div class="col-md-3 mb-3">
     <label for="streetNum">Numero</label>
-    <input type="number" class="form-control" id="streetNum" value="">
+    <input type="number" class="form-control is-invalid" id="streetNum" onchange="validateAddInfo()" value="" required>
+    <div class="invalid-feedback">
+      Ingresa un numero
+    </div>
   </div> 
   <div class="row">
   <div class="col-md-3 mb-3">
     <label for="streetCor">Esquina</label>
-    <input type="text" class="form-control" id="streetCor" value="">
+    <input type="text" class="form-control is-invalid" id="streetCor" value="" required>
+    <div class="invalid-feedback">
+      Ingresa una esquina
+    </div>
   </div>
   </div>
 </div>
+</form>
+</div>
+<hr class="mb-4">
+<div id="sType" class="col-md-8 order-md-1">
+<h5 class="mb-3">Costos</h5>
+<ul class="list-group mb-3">
+  <li class="list-group-item d-flex justify-content-between lh-condensed">
+    <div>
+      <h6 class="my-0">Subtotal</h6>
+      <small class="text-muted">Costo unitario del producto por cantidad</small>
+    </div>
+    <span class="text-muted" id="genSubtotal">-</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between lh-condensed">
+    <div>
+      <h6 class="my-0">Costo de envio</h6>
+      <small class="text-muted">Según el tipo de envio</small>
+    </div>
+    <p id="currency2"></p><span class="text-muted" id="delCost">-</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Total ($)</span>
+    <p id="currency1"></p><strong id="finalTotal">-</strong>
+  </li>
+</ul>
+<hr class="mb-4">
+<h5 class="mb-3">Forma de pago</h5>
+<div class="pt-10">
+  <p id="payMethod">No ha seleccionado</p><a style="color:blue;" data-bs-toggle="modal"
+      data-bs-target="#exampleModal">
+      <u class="cursor-active">Seleccionar</u>
+    </a>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="exampleModalLabel">Forma de Pago</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit" onclick="disableCard()">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Tarjeta de Crédito
+              </label>
+            </div>
+            <hr>
+          </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-9"></div>
+                <div class="col-6">
+                  <p>Número de Tarjeta</p>
+                  <input id="cNum" class="form-control is-invalid" type="number" aria-label="default input example" onchange="validateCCInfo()" disabled>
+                </div>
+                <div class="col-4">
+                  <p>Código de seg.</p>
+                  <input id="sec" class="form-control is-invalid" type="number" aria-label="default input example" onchange="validateCCInfo()" disabled>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="container">
+              <div class="row">
+                <div class="col-9"></div>
+                <div class="col-6">
+                  <p>Vencimiento (MM-AA)</p>
+                  <input id="expi" class="form-control is-invalid" type="number" max="9999" min="0000" onchange="validateCCInfo()" disabled
+                    aria-label="default input example">
+                </div>
+              </div>
+            </div>
+          <br>
+          <div class="container">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="bankT" onclick="disableBank()">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Transferencia bancaria
+              </label>
+            </div>
+            <hr>
+          </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-9"></div>
+                <div class="col-6">
+                  <p>Número de Cuenta</p>
+                  <input id="accNum" class="form-control is-invalid" type="number" aria-label="default input example" onchange="validateBankInfo()" disabled>
+                </div>
+              </div>
+            </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="closeMod">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="mb-4">
+<button id="submitOrder" class="btn btn-primary btn-lg" type="submit" onchange='deliveryCost()'>Finalizar compra</button>
 </div>
   </main>
   <footer class="text-muted">
@@ -100,6 +212,10 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>Has comprado con éxito!</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
