@@ -60,9 +60,47 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="text-center p-4">
+        <h2>Perfil</h2>
+        <hr class="mb-4">  
       </div>
+      <form class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col">
+          <label for="firstName" class="form-label">Primer Nombre*</label>
+         <input class="form-control" type="text" id="firstName" name="info" required>
+         <div class="invalid-feedback">Ingresa un nombre</div>
+        </div>
+      <div class="col">
+         <label for="midName" class="form-label">Segundo Nombre</label>
+         <input class="form-control" type="text" id="midName" name="info">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="firstLastName" class="form-label">Primer Apellido*</label>
+       <input class="form-control" type="text" id="firstLastName" name="info" required>
+       <div class="invalid-feedback">Ingresa un apellido</div>
+      </div>
+      <div class="col">
+        <label for="secLastName" class="form-label">Segundo Apellido</label>
+        <input class="form-control" type="text" id="secLastName" name="info">
+     </div>
+    </div>
+     <div class="row">
+      <div class="col">
+      <label for="eMail" class="form-label">E-mail*</label>
+      <input class="form-control" type="email" id="eMail" name="info" required>
+   </div>
+   <div class="col">
+    <label for="phoneNum" class="form-label">Telefono de contacto</label>
+   <input class="form-control" type="number" id="phoneNum" name="info">
+   <div class="invalid-feedback">Ingresa un numero de telefono</div>
+  </div>
+</div>
+  <hr class="mb-4">
+  <button id="submitInfo" class="btn btn-primary btn-lg" type="submit">Guardar cambios</button>
+      </form>
     </div>
   </main>
   <footer class="text-muted">

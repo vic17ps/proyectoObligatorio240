@@ -45,60 +45,54 @@
     </div>
   </nav>
   <main>
-    <div class="text-center p-4">
+<div class="container">
+  <div class="text-center p-4">
     <h2>Carrito de compras</h2>
     <p class="lead">Artículos a comprar</p>
   </div>
+</div>
     <div class="container" id="cartCont">
     </div>
     <hr class="mb-4">
+    <form class="needs-validation" novalidate>
     <div id="sType" class="col-md-8 order-md-1">
       <h5 class="mb-3">Tipo de envio</h5>
       <div  class="d-block my-3">
-        <div class="custom-control custom-radio">
-          <input name="publicationType" type="radio" class="delivery" value=0.15 required> Premium 2 a 5 días (15%) <br>
+        
+        <div class="form-check">
+          <input name="publicationType" type="radio" class="form-check-input" value=0.15 required> Premium 2 a 5 días (15%) <br>
         </div>
-        <div class="custom-control custom-radio">
-          <input name="publicationType" type="radio" class="delivery" value=0.07 required> Express 5 a 8 días (7%) <br>
+        <div class="form-check">
+          <input name="publicationType" type="radio" class="form-check-input" value=0.07 required> Express 5 a 8 días (7%) <br>
         </div>
-        <div class="custom-control custom-radio">
-          <input name="publicationType" type="radio" class="delivery" value=0.05 required> Standard 12 a 15 días (5%) <br>
-        </div>
-        <div class="invalid-feedback">
-          Seleccione un tipo de envio
+        <div class="form-check">
+          <input name="publicationType" type="radio" class="form-check-input" value=0.05 required> Standard 12 a 15 días (5%) <br>
         </div>
       </div>
+      <div class="invalid-feedback">Seleccione un tipo de envio</div>
     </div>
-    <div id="sDir" class="col-md-8 order-md-1">
-    <form class="row g-3 needs-validation" id="address" novalidate>
-    <h5 class="mb-3">Dirección de envío</h5>
-    <div id="dirCenter" class="row">
-    <div class="col-md-3 mb-3">
-    <label for="street">Calle</label>
-    <input type="text" class="form-control is-invalid" id="streetName" onchange="validateAddInfo()" value="" required>
-    <div class="invalid-feedback">
-      Ingresa una calle
-    </div>
-  </div>
-    <div class="col-md-3 mb-3">
-    <label for="streetNum">Numero</label>
-    <input type="number" class="form-control is-invalid" id="streetNum" onchange="validateAddInfo()" value="" required>
-    <div class="invalid-feedback">
-      Ingresa un numero
-    </div>
-  </div> 
-  <div class="row">
-  <div class="col-md-3 mb-3">
-    <label for="streetCor">Esquina</label>
-    <input type="text" class="form-control is-invalid" id="streetCor" value="" required>
-    <div class="invalid-feedback">
-      Ingresa una esquina
-    </div>
-  </div>
-  </div>
-</div>
-</form>
-</div>
+                <div id="sDir" class="col-md-8 order-md-1">
+                        <h5 class="mb-3">Dirección de envío</h5>
+                        <div class="col-md-12">
+                            <label for="streetName" class="form-label">Calle</label>
+                           <input class="form-control" type="text" id="streetName" required>
+                           <div class="invalid-feedback">Ingresa una calle</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="streetNum" class="form-label">Numero</label>
+                            <input class="form-control" type="number" id="streetNum" required>
+                             <div class="invalid-feedback">Ingresa un numero</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="streetCor" class="form-label">Esquina</label>
+                            <input class="form-control" type="text" id="streetCor" required>
+                             <div class="invalid-feedback">Ingresa una esquina</div>
+                        </div>
+                    </div>
+                    
+
 <hr class="mb-4">
 <div id="sType" class="col-md-8 order-md-1">
 <h5 class="mb-3">Costos</h5>
@@ -115,19 +109,20 @@
       <h6 class="my-0">Costo de envio</h6>
       <small class="text-muted">Según el tipo de envio</small>
     </div>
-    <p id="currency2"></p><span class="text-muted" id="delCost">-</span>
+    <p>USD <span class="text-muted" id="delCost">-</span></p>
   </li>
   <li class="list-group-item d-flex justify-content-between">
     <span>Total ($)</span>
-    <p id="currency1"></p><strong id="finalTotal">-</strong>
+    <p>USD <strong id="finalTotal">-</strong></p>
   </li>
 </ul>
 <hr class="mb-4">
 <h5 class="mb-3">Forma de pago</h5>
 <div class="pt-10">
   <p id="payMethod">No ha seleccionado</p><a style="color:blue;" data-bs-toggle="modal"
-      data-bs-target="#exampleModal">
+      data-bs-target="#exampleModal" id="linkModal">
       <u class="cursor-active">Seleccionar</u>
+      <span id="errorPayMethod"></span>
     </a>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -139,7 +134,7 @@
         <div class="modal-body">
           <div class="container">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit" onclick="disableCard()">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit" onclick="disableCard(), validateCCInfo()" required>
               <label class="form-check-label" for="flexRadioDefault1">
                 Tarjeta de Crédito
               </label>
@@ -151,11 +146,11 @@
                 <div class="col-9"></div>
                 <div class="col-6">
                   <p>Número de Tarjeta</p>
-                  <input id="cNum" class="form-control is-invalid" type="number" aria-label="default input example" onchange="validateCCInfo()" disabled>
+                  <input id="cNum" class="form-control" type="number" aria-label="default input example" disabled required>
                 </div>
                 <div class="col-4">
                   <p>Código de seg.</p>
-                  <input id="sec" class="form-control is-invalid" type="number" aria-label="default input example" onchange="validateCCInfo()" disabled>
+                  <input id="sec" class="form-control" type="number" aria-label="default input example" disabled required>
                 </div>
               </div>
             </div>
@@ -165,15 +160,15 @@
                 <div class="col-9"></div>
                 <div class="col-6">
                   <p>Vencimiento (MM-AA)</p>
-                  <input id="expi" class="form-control is-invalid" type="number" max="9999" min="0000" onchange="validateCCInfo()" disabled
-                    aria-label="default input example">
+                  <input id="expi" class="form-control" type="number" max="9999" min="0000" disabled
+                    aria-label="default input example" required>
                 </div>
               </div>
             </div>
           <br>
           <div class="container">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="bankT" onclick="disableBank()">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="bankT" onclick="disableBank(), validateCCInfo()" required>
               <label class="form-check-label" for="flexRadioDefault1">
                 Transferencia bancaria
               </label>
@@ -185,13 +180,13 @@
                 <div class="col-9"></div>
                 <div class="col-6">
                   <p>Número de Cuenta</p>
-                  <input id="accNum" class="form-control is-invalid" type="number" aria-label="default input example" onchange="validateBankInfo()" disabled>
+                  <input id="accNum" class="form-control" type="number" aria-label="default input example" disabled required>
                 </div>
               </div>
             </div>
+          </form>
           <br>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="closeMod">Cerrar</button>
           </div>
         </div>
       </div>
@@ -199,7 +194,8 @@
   </div>
 </div>
 <hr class="mb-4">
-<button id="submitOrder" class="btn btn-primary btn-lg" type="submit" onchange='deliveryCost()'>Finalizar compra</button>
+<button id="submitOrder" class="btn btn-primary btn-lg" type="submit">Finalizar compra</button>
+                      </form>
 </div>
   </main>
   <footer class="text-muted">

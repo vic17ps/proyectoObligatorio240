@@ -274,3 +274,7 @@ h3 {
 #dirCenter {
   display: inline-block;
 }
+
+#errorPayMethod {
+  color: #dc3545;
+}
